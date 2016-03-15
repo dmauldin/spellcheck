@@ -1,0 +1,33 @@
+Please write a simple HTTP web service that provides a RESTful API to determine if a word is "misspelled" or not.  If it is, give some spelling suggestions.
+
+* For this exercise, misspelled words are:
+    A. Words that have repeating characters (ie: balllooooon)
+    B. Words that are missing one or more vowels (ie: balln)
+    C. Words with mixed-casing (ie: BAllOOn) - Note: "Hello" and "HELLO" are correct and should not be considered mixed-casing
+    D. Words that have a combination of A, B and C type erroes (ie: BlllLLlln)
+* Use http://tinyurl.com/bvapsn7 as your dictionary of words.
+* The endpoint of the service should be /spelling/$word
+    * Please use 8080 as default port for the service (ie: we should be able to test the service with "curl http://localhost:8080/spelling/House")
+* The service needs to return:
+    * 404 if the word was not found in the dictionary
+    * 200 if the word was found.  The body of the response should be JSON encoded and should inform the caller if the spelling of $word is correct.  If it is not, it should contain a list of suggestions for possible correct spellings.
+
+Examples:
+    URL: http://localhost:8080/spelling/Balloon
+    Response code: 200
+    Response body:
+    { correct: true }
+
+    URL: http://localhost:8080/spelling/BallloN
+    Response code: 200
+    Response body:
+    {
+        correct: false,
+        suggestions: ["abalone", "balloon"]
+    }
+
+    URL: http://localhost:8080/spelling/fsiuyflusyifys
+    Response code: 404
+
+    URL: http://localhost:8080/spelling/dua
+    Response code: 404
